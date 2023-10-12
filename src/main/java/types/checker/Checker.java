@@ -10,10 +10,7 @@ import types.*;
 import types.checker.exceptions.DuplicateNameException;
 import types.checker.exceptions.UnexpectedTypeException;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
@@ -173,18 +170,6 @@ Checker extends NuMLBaseVisitor<Type>
 	}
 
 	@Override
-	public Type visitAtom_exp(NuMLParser.Atom_expContext ctx)
-	{
-		return visitAtom(ctx.atom());
-	}
-
-	@Override
-	public Type visitExp_paren(NuMLParser.Exp_parenContext ctx)
-	{
-		return visit(ctx.exp());
-	}
-
-	@Override
 	public Type visitTuple_type(NuMLParser.Tuple_typeContext ctx)
 	{
 		return new TupleType(ctx.typelist().type().stream().map(this::visitType).toList());
@@ -230,6 +215,18 @@ Checker extends NuMLBaseVisitor<Type>
 	}
 
 	@Override
+	public Type visitExp_paren(NuMLParser.Exp_parenContext ctx)
+	{
+		return visit(ctx.exp());
+	}
+
+	@Override
+	public Type visitAtom_exp(NuMLParser.Atom_expContext ctx)
+	{
+		return visitAtom(ctx.atom());
+	}
+
+	@Override
 	public Type visitInfix_op(NuMLParser.Infix_opContext ctx)
 	{
 		var opName=ctx.OP_INFIX().getText();
@@ -262,14 +259,14 @@ Checker extends NuMLBaseVisitor<Type>
 	{
 		textorator.preact("If_then_else");
 		var pred=visit(ctx.pred);
-		if(pred!=BoolType.of())
+		if(!Objects.equals(pred,BoolType.of()))
 		{
 			throw new UnexpectedTypeException(BoolType.of(),pred,ctx.start,ctx.stop,"if-then-else condition must be boolean");
 		}
 		var then=visit(ctx.then);
 		var else_=visit(ctx.else_);
 		textorator.postact("If_then_else");
-		if(then==else_)
+		if(Objects.equals(then,else_))
 			return then;
 		else
 			throw new UnexpectedTypeException(then,else_,ctx.start,ctx.stop,"Incompatible then and else types");
@@ -388,6 +385,22 @@ Checker extends NuMLBaseVisitor<Type>
 	public Type visitBool(NuMLParser.BoolContext ctx)
 	{
 		return BoolType.of();
+	}
+
+	/**
+	 @return true if typeA.equals(typeB), otherwise tries to unify them and then compare
+	 */
+	public boolean equalsMetaVariable(Type typeA,Type typeB)
+	{
+		if(typeA instanceof MetaType)
+		{
+			return equalsMetaVariable(typeB,typeB);
+		}
+		if(typeB instanceof MetaType)
+		{
+			return equalsMetaVariable(typeA,typeA);
+		}
+		return Objects.equals(typeA,typeB);
 	}
 
 	@Override
