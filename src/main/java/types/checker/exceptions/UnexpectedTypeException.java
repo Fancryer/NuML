@@ -2,7 +2,6 @@ package types.checker.exceptions;
 
 import common.Pair;
 import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.tree.ParseTree;
 import types.Type;
 
 import java.util.Objects;
@@ -68,7 +67,7 @@ public class UnexpectedTypeException extends InferException
 	@Override
 	public String getMessage()
 	{
-		return "Expected %s but got %s at line %d, column %d%s".formatted(left,right,line,column,getDetails());
+		return "Expected %s but got %s at lines %s, columns %s%s".formatted(left,right,line,column,getDetails());
 	}
 
 	public String getDetails()

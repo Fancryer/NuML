@@ -10,14 +10,16 @@ import types.*;
 import types.checker.exceptions.DuplicateNameException;
 import types.checker.exceptions.UnexpectedTypeException;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 import static gen.NuMLParser.Compile_unitContext;
 
-public class
-Checker extends NuMLBaseVisitor<Type>
+public class Checker extends NuMLBaseVisitor<Type>
 {
 	private final Deque<Environment> environment=new ArrayDeque<>();
 	private final Textorator textorator=new Textorator("");
@@ -117,11 +119,11 @@ Checker extends NuMLBaseVisitor<Type>
 			inputTypeList.add(visit);
 			environment.getFirst().put(argContext.name.getText(),visit);
 		}
-		var declaredReturnType=visitType(ctx.type());
+		var declaredReturnType=new MetaVariable();//visitType(ctx.type());
 		var ret=new FunctionType(inputTypeList,declaredReturnType,environment.getFirst());
 		environment.getFirst().put(name,ret);
 		var funcRetType=visitBlock(ctx.block());
-		if(funcRetType!=declaredReturnType)
+		if(!declaredReturnType.equals(funcRetType))
 		{
 			throw new UnexpectedTypeException(declaredReturnType,funcRetType,ctx.start,ctx.stop,"Function return type mismatch");
 		}
@@ -157,6 +159,7 @@ Checker extends NuMLBaseVisitor<Type>
 	@Override
 	public Type visitType(NuMLParser.TypeContext ctx)
 	{
+		if(ctx==null) return new MetaVariable();
 		if(ctx.ID()==null) return visitTuple_type(ctx.tuple_type());
 		return switch(ctx.ID().getText())
 		{
@@ -258,18 +261,28 @@ Checker extends NuMLBaseVisitor<Type>
 	public Type visitIf_then_else(NuMLParser.If_then_elseContext ctx)
 	{
 		textorator.preact("If_then_else");
-		var pred=visit(ctx.pred);
-		if(!Objects.equals(pred,BoolType.of()))
+		Type pred=visit(ctx.pred);
+		if(!(pred instanceof BoolType))
 		{
 			throw new UnexpectedTypeException(BoolType.of(),pred,ctx.start,ctx.stop,"if-then-else condition must be boolean");
 		}
-		var then=visit(ctx.then);
-		var else_=visit(ctx.else_);
+		Type
+				then=visit(ctx.then),
+				else_=visit(ctx.else_);
 		textorator.postact("If_then_else");
-		if(Objects.equals(then,else_))
+		if(else_.equals(then))
 			return then;
 		else
-			throw new UnexpectedTypeException(then,else_,ctx.start,ctx.stop,"Incompatible then and else types");
+			throw new UnexpectedTypeException
+					(
+							then,
+							else_,
+							ctx.start.getLine(),
+							ctx.stop.getLine(),
+							ctx.start.getCharPositionInLine(),
+							ctx.stop.getCharPositionInLine(),
+							"Incompatible then and else types"
+					);
 	}
 
 	@Override
@@ -313,7 +326,12 @@ Checker extends NuMLBaseVisitor<Type>
 		textorator.preact("Call");
 		var name=ctx.ID().getText();
 		var funct=environment.getFirst().get(name);
-		if(funct.isEmpty()) throw new IllegalStateException("Unknown function: "+name);
+		if(funct.isEmpty())
+		{
+			return MetaVariable.of();
+			//throw new IllegalStateException("Unknown function: "+name);
+		}
+		System.out.println("Funct get");
 		var type=funct.get();
 		if(!(type instanceof FunctionType functionType))
 		{
@@ -385,22 +403,6 @@ Checker extends NuMLBaseVisitor<Type>
 	public Type visitBool(NuMLParser.BoolContext ctx)
 	{
 		return BoolType.of();
-	}
-
-	/**
-	 @return true if typeA.equals(typeB), otherwise tries to unify them and then compare
-	 */
-	public boolean equalsMetaVariable(Type typeA,Type typeB)
-	{
-		if(typeA instanceof MetaType)
-		{
-			return equalsMetaVariable(typeB,typeB);
-		}
-		if(typeB instanceof MetaType)
-		{
-			return equalsMetaVariable(typeA,typeA);
-		}
-		return Objects.equals(typeA,typeB);
 	}
 
 	@Override

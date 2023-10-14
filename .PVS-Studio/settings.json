@@ -1,0 +1,28 @@
+{
+  "threads": 4,
+  "incremental": false,
+  "sourcetree-root": "E:/NuML/src/main/java",
+  "disable-cache": false,
+  "exclude": [],
+  "fail-on-warnings": false,
+  "analysis-mode": [
+    "GA"
+  ],
+  "disabled-warnings": [],
+  "enabled-warnings": [],
+  "additional-warnings": [],
+  "suppress-base": ".PVS-Studio/suppress_base.json",
+  "timeout": 10,
+  "compatibility": false,
+  "exclude-packages": [],
+  "runJavaWithAddOpensForReflectiveAccess": false,
+  "verbose": false,
+  "include-generated": false,
+  "launch-mode": "IDEA",
+  "benchmark": false,
+  "java": "java",
+  "jvm-arguments": [
+    "-Xss64m"
+  ],
+  "logging": "OFF"
+}

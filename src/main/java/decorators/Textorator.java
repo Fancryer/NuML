@@ -41,7 +41,7 @@ public class Textorator
 
 	private int dec()
 	{
-		return --depth;
+		return depth==0?0:--depth;
 	}
 
 	public Textorator preact(String text)

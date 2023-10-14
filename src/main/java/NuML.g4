@@ -9,7 +9,7 @@ module_stat: decl | bind;
 decl: var_decl | funct_decl;
 
 var_decl: 'let' bind;
-funct_decl: 'let' name=ID funct_args '==>' type '=' block;
+funct_decl: 'let' name=ID funct_args /*'==>' type*/ '=' block;
 
 funct_args: arg_list;
 
