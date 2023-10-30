@@ -12,15 +12,20 @@ repositories {
 }
 
 dependencies {
+    api 'com.google.guava:guava:32.1.1-jre'
     api 'org.antlr:antlr4:4.13.0'
     api 'org.antlr:antlr4-runtime:4.13.0'
     api 'org.projectlombok:lombok:1.18.30'
-    compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    implementation 'io.vavr:vavr:1.0.0-alpha-4'
+    implementation 'net.bytebuddy:byte-buddy:1.14.8'
+    implementation 'org.ow2.asm:asm:9.6'
+    implementation 'org.jetbrains:annotations:24.0.0'
 }
 
 application {
-    mainClass = 'Main'
+    mainClass = 'numl.Main'
 }
 
 tasks.withType(JavaCompile).configureEach {

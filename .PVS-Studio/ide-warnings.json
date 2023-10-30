@@ -2,7 +2,8 @@
   "languages": {
     "JAVA": {
       "groups": {
-        "OWASP": "ENABLED"
+        "OWASP": "ENABLED",
+        "GA": "ENABLED"
       }
     }
   },
