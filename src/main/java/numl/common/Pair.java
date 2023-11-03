@@ -17,4 +17,12 @@ public record Pair<K,V>(K key,V value)
 	{
 		return "{%s;%s}".formatted(key,value);
 	}
+
+	/**
+	 @return true if key.equals(value)
+	 */
+	public boolean isSymmetric()
+	{
+		return key.equals(value);
+	}
 }

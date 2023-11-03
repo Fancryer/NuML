@@ -4,18 +4,17 @@ import numl.types.Type;
 
 import java.util.LinkedHashMap;
 import java.util.Optional;
-import java.util.SequencedMap;
 
 public class Environment
 {
-	private final SequencedMap<String,Type> types;
+	private final LinkedHashMap<String,Type> types;
 
 	public Environment()
 	{
 		this(new LinkedHashMap<>());
 	}
 
-	public Environment(final SequencedMap<String,Type> types)
+	public Environment(final LinkedHashMap<String,Type> types)
 	{
 		this.types=types;
 	}

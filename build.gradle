@@ -31,3 +31,5 @@ application {
 tasks.withType(JavaCompile).configureEach {
     options.compilerArgs.add '--enable-preview'
 }
+
+sourceCompatibility=JavaVersion.VERSION_20

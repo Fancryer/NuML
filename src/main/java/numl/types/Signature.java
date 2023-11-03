@@ -53,12 +53,12 @@ public class Signature
 
 	public Type first()
 	{
-		return args.getFirst();
+		return args.get(0);
 	}
 
 	public Type last()
 	{
-		return args.getLast();
+		return args.get(args.size()-1);
 	}
 
 	@Override
@@ -66,6 +66,7 @@ public class Signature
 	{
 		return obj instanceof Signature sig
 		       &&sig.args.size()==args.size()
-		       &&IntStream.range(0,args.size()).allMatch(i->args.get(i).equals(sig.args.get(i)));
+		       &&IntStream.range(0,args.size())
+		                  .allMatch(i->args.get(i).equals(sig.args.get(i)));
 	}
 }
