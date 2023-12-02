@@ -43,6 +43,22 @@
       <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
     </JetCodeStyleSettings>
     <ScalaCodeStyleSettings>
+      <option name="WRAP_BEFORE_WITH_KEYWORD" value="true" />
+      <option name="PLACE_CLOSURE_PARAMETERS_ON_NEW_LINE" value="true" />
+      <option name="SPACE_INSIDE_CLOSURE_BRACES" value="false" />
+      <option name="SPACE_INSIDE_SELF_TYPE_BRACES" value="false" />
+      <option name="ALIGN_IF_ELSE" value="true" />
+      <option name="ALIGN_EXTENDS_WITH" value="3" />
+      <option name="NOT_CONTINUATION_INDENT_FOR_PARAMS" value="true" />
+      <option name="ALIGN_TUPLE_ELEMENTS" value="true" />
+      <option name="INDENT_FIRST_PARAMETER_CLAUSE" value="true" />
+      <option name="SPACE_BEFORE_INFIX_OPERATOR_LIKE_METHOD_CALL_PARENTHESES" value="false" />
+      <option name="SPACE_AFTER_TYPE_COLON" value="false" />
+      <option name="SPACE_BEFORE_BRACE_METHOD_CALL" value="false" />
+      <option name="ALIGN_PARAMETER_TYPES_IN_MULTILINE_DECLARATIONS" value="2" />
+      <option name="SPACE_BEFORE_TYPE_PARAMETER_LEADING_CONTEXT_BOUND_COLON_HK" value="false" />
+      <option name="SPACE_BEFORE_TYPE_PARAMETER_REST_CONTEXT_BOUND_COLONS" value="false" />
+      <option name="KEEP_XML_FORMATTING" value="true" />
       <option name="MULTILINE_STRING_CLOSING_QUOTES_ON_NEW_LINE" value="true" />
     </ScalaCodeStyleSettings>
     <yaml>
@@ -165,6 +181,39 @@
     </codeStyleSettings>
     <codeStyleSettings language="Markdown">
       <indentOptions>
+        <option name="USE_TAB_CHARACTER" value="true" />
+        <option name="SMART_TABS" value="true" />
+      </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="Scala">
+      <option name="BRACE_STYLE" value="2" />
+      <option name="CLASS_BRACE_STYLE" value="2" />
+      <option name="METHOD_BRACE_STYLE" value="2" />
+      <option name="WHILE_ON_NEW_LINE" value="true" />
+      <option name="CATCH_ON_NEW_LINE" value="true" />
+      <option name="FINALLY_ON_NEW_LINE" value="true" />
+      <option name="ALIGN_MULTILINE_CHAINED_METHODS" value="true" />
+      <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
+      <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
+      <option name="SPACE_AFTER_COMMA" value="false" />
+      <option name="SPACE_AFTER_SEMICOLON" value="false" />
+      <option name="SPACE_BEFORE_IF_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_WHILE_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_FOR_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_CLASS_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_METHOD_LBRACE" value="false" />
+      <option name="CALL_PARAMETERS_WRAP" value="5" />
+      <option name="PREFER_PARAMETERS_WRAP" value="true" />
+      <option name="METHOD_PARAMETERS_WRAP" value="5" />
+      <option name="EXTENDS_LIST_WRAP" value="5" />
+      <option name="METHOD_CALL_CHAIN_WRAP" value="5" />
+      <option name="BINARY_OPERATION_WRAP" value="1" />
+      <option name="FOR_STATEMENT_WRAP" value="5" />
+      <option name="WRAP_LONG_LINES" value="true" />
+      <indentOptions>
+        <option name="INDENT_SIZE" value="4" />
+        <option name="CONTINUATION_INDENT_SIZE" value="4" />
+        <option name="TAB_SIZE" value="4" />
         <option name="USE_TAB_CHARACTER" value="true" />
         <option name="SMART_TABS" value="true" />
       </indentOptions>

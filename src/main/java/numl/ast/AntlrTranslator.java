@@ -56,22 +56,18 @@ public class AntlrTranslator
 	public NFunctDecl visitFunct_decl(Funct_declContext ctx)
 	{
 		NType type;
-		if(ctx.type()!=null)
-		{
-			type=visitType(ctx.type());
-		}
-		else
-		{
-			type=NFlatType.builder()
-			              .position(Position.of(ctx.start,ctx.stop))
-			              .name("Nil")
-			              .build();
-		}
+		var position=Position.of(ctx.start,ctx.stop);
+		type=ctx.type()!=null
+		     ?visitType(ctx.type())
+		     :NFlatType.builder()
+		               .position(position)
+		               .name("Nil")
+		               .build();
 		return NFunctDecl.builder()
-		                 .position(Position.of(ctx.start,ctx.stop))
+		                 .position(position)
 		                 .name(ctx.ID().getText())
 		                 .args(ctx.funct_args().arg().stream().map(this::visitArg).toList())
-		                 .type(type)
+		                 .returnType(type)
 		                 .block(visitBlock(ctx.block()))
 		                 .build();
 	}

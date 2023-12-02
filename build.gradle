@@ -20,16 +20,22 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.30'
     implementation 'io.vavr:vavr:1.0.0-alpha-4'
     implementation 'net.bytebuddy:byte-buddy:1.14.8'
-    implementation 'org.ow2.asm:asm:9.6'
     implementation 'org.jetbrains:annotations:24.0.0'
+    implementation 'org.ow2.asm:asm:9.6'
+    implementation 'org.scala-lang:scala3-library_3:3.4.0-RC1-bin-20231116-fdf8de3-NIGHTLY'
 }
 
 application {
     mainClass = 'numl.Main'
 }
 
+sourceCompatibility = JavaVersion.VERSION_20
+
 tasks.withType(JavaCompile).configureEach {
     options.compilerArgs.add '--enable-preview'
 }
 
-sourceCompatibility=JavaVersion.VERSION_20
+run {
+    jvmArgs = ['--enable-preview']
+}
+

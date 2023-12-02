@@ -8,10 +8,4 @@ import lombok.experimental.SuperBuilder;
 public final class NArrayType extends NType
 {
 	private final NType type;
-
-	@Override
-	public Class<?> asJavaClass()
-	{
-		return NType[].class;
-	}
 }

@@ -8,4 +8,10 @@ import lombok.experimental.SuperBuilder;
 public final class NBranch extends NExp
 {
 	private final NExp pred, then, else_;
+
+	@Override
+	public String toString()
+	{
+		return "(branch (pred %s) (then %s) (else %s))".formatted(pred,then,else_);
+	}
 }

@@ -3,6 +3,6 @@ package numl.ast.nodes;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
-public abstract sealed class NNumber extends NAtom permits NInt, NFloat
+public sealed abstract class NNumber extends NAtom permits NInt, NFloat
 {
 }

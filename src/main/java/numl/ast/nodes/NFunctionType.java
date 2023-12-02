@@ -10,10 +10,4 @@ import java.util.List;
 public final class NFunctionType extends NType
 {
 	private final List<NType> types;
-
-	@Override
-	public Class<?> asJavaClass()
-	{
-		return null;
-	}
 }

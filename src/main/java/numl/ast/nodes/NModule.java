@@ -2,6 +2,7 @@ package numl.ast.nodes;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import numl.ast.Position;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 @Getter
 public final class NModule extends Node
 {
+	private final Position position;
 	private final String name;
 	private final List<NStat> stats;
 

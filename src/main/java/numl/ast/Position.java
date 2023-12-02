@@ -21,6 +21,11 @@ public class Position
 		return new Position(start.getLine(),end.getLine(),start.getCharPositionInLine(),end.getCharPositionInLine());
 	}
 
+	public static Position of(int lineStart,int lineEnd,int columnStart,int columnEnd)
+	{
+		return new Position(lineStart,lineEnd,columnStart,columnEnd);
+	}
+
 	public String getLines()
 	{
 		return "[%d-%d]".formatted(lineStart,lineEnd);

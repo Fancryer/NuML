@@ -9,7 +9,7 @@ public class Zipper<K,V>
 {
 	public Stream<Pair<K,V>> zip(Stream<K> kStream,Stream<V> vStream)
 	{
-		return minMap(kStream.toList(),vStream.toList());
+		return zip(kStream.toList(),vStream.toList());
 	}
 
 	public Stream<Pair<K,V>> minMap(List<K> a,List<V> b)
@@ -32,8 +32,8 @@ public class Zipper<K,V>
 		return IntStream.range(0,Math.min(a.size(),b.size()));
 	}
 
-	public List<Pair<K,V>> zip(List<K> kList,List<V> vList)
+	public Stream<Pair<K,V>> zip(List<K> kList,List<V> vList)
 	{
-		return minMap(kList,vList).toList();
+		return minMap(kList,vList);
 	}
 }

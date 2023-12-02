@@ -27,10 +27,4 @@ public final class NTupleType extends NType
 		sb.append(")");
 		return sb.toString();
 	}
-
-	@Override
-	public Class<?> asJavaClass()
-	{
-		return null;
-	}
 }

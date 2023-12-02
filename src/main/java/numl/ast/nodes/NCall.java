@@ -12,4 +12,10 @@ public final class NCall extends NExp
 	private final boolean isNative;
 	private final String name;
 	private final List<NExp> args;
+
+	@Override
+	public String toString()
+	{
+		return "(call %s%s (args %s))".formatted(isNative?"$":"",name,args);
+	}
 }
